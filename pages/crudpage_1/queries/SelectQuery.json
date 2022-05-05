@@ -2,7 +2,7 @@
   "pluginType": "DB",
   "pluginId": "postgres-plugin",
   "unpublishedAction": {
-    "name": "UpdateQuery",
+    "name": "SelectQuery",
     "datasource": {
       "name": "49d8e9aa",
       "pluginId": "postgres-plugin",
@@ -13,35 +13,35 @@
       "policies": [],
       "userPermissions": []
     },
-    "pageId": "Page1",
+    "pageId": "crudpage_1",
     "actionConfiguration": {
       "timeoutInMillisecond": 10000,
       "paginationType": "NONE",
       "encodeParamsToggle": true,
-      "body": "UPDATE public.\"configs\" SET\n\t\t\"configName\" = '{{update_col_2.text}}',\n    \"configJson\" = '{{update_col_3.text}}',\n    \"configVersion\" = '{{update_col_4.text}}',\n    \"updatedAt\" = '{{update_col_5.text}}'\n  WHERE \"id\" = {{Table1.selectedRow.id}};",
+      "body": "SELECT * FROM public.\"configs\"\nWHERE \"configName\" ilike '%{{Table1.searchText || \"\"}}%'\nORDER BY \"{{col_select.selectedOptionValue}}\" {{order_select.selectedOptionValue}}\nLIMIT {{Table1.pageSize}}\nOFFSET {{(Table1.pageNo - 1) * Table1.pageSize}};",
       "pluginSpecifiedTemplates": [
         {
-          "value": true
+          "value": false
         }
       ]
     },
-    "executeOnLoad": false,
+    "executeOnLoad": true,
     "isValid": true,
     "invalids": [],
     "messages": [],
     "jsonPathKeys": [
-      "Table1.selectedRow.id",
-      "update_col_2.text",
-      "update_col_3.text",
-      "update_col_4.text",
-      "update_col_5.text"
+      "(Table1.pageNo - 1) * Table1.pageSize",
+      "Table1.pageSize",
+      "Table1.searchText || \"\"",
+      "col_select.selectedOptionValue",
+      "order_select.selectedOptionValue"
     ],
-    "userSetOnLoad": false,
+    "userSetOnLoad": true,
     "confirmBeforeExecute": false,
     "policies": [],
     "userPermissions": []
   },
-  "id": "Page1_UpdateQuery",
+  "id": "crudpage_1_SelectQuery",
   "deleted": false,
-  "gitSyncId": "6273a0a3514ced4439beff0c_6273a0af514ced4439beff14"
+  "gitSyncId": "6273a0a3514ced4439beff0c_6273a0af514ced4439beff13"
 }
